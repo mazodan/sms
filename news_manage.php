@@ -55,9 +55,28 @@
 							<td class="center"><?= $full_name ?></td>
 							<td class="center"><?= $equipment ?></td>
 							<td class="center"><?= $date_borrow ?></td>
-							<td class="center"><?= $date_return ?></td>
-							<td class="center"><?= $remark ?></td>
-
+							<td class="center"><?php 
+								if ($date_return == "") {
+									echo(
+										'<form action="" method="post">
+											<input type="hidden" value="'.$id.'">
+											<button type="submit" class="btn btn-info"><i class="halflings-icon white check"></i>Return Item</button>
+										</form>'
+									);
+								} else {
+									echo($date_return);
+								}
+							?></td>
+							<td class="center"><?php
+								if ($remark == "") {
+									echo('<a class="btn btn-info">
+									<i class="icon-play"></i>
+									</a>'
+									);
+								} else {
+									echo($remark);
+								}
+							?></td>
 						</tr>
 						<?php } ?>
 					</tbody>
