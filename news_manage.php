@@ -13,6 +13,16 @@
 
 		$res = update($data, $_POST['id'], "item_logs"); 
 	}  
+
+	if(isset($_POST['remark_update'])){ //check if form was submitted
+
+		date_default_timezone_set('Asia/Manila');
+		$data = array(
+			"remark" => $_POST['remark']
+		);
+
+		$res = update($data, $_POST['id'], "item_logs"); 
+	}  
 ?>
 
 <!-- main content -->
@@ -84,7 +94,7 @@
 									echo('<form action="" method="post" class="form-inline">
 										<input type="hidden" name="id" value="'.$id.'">
 										<input type="text" name="remark" id="remark" class="input-medium">
-										<button type="submit" class="btn btn-info"><i class="icon-play"></i></button>
+										<button type="submit" name="remark_update" class="btn btn-info"><i class="icon-play"></i></button>
 									</form>'
 									);
 								} else {
