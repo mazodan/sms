@@ -32,56 +32,35 @@
 						  <th>Remarks</th>
 					  </tr>
 				  </thead>   
-				  <tbody>
-				  <?php 
-				  		$table_name = "manipulator";
+					<tbody>
+						<?php 
+							$table_name = "item_logs";
 
-				  		//get all records from users table
-						$news_data = get($table_name);
+							//get all records from users table
+							$log_data = get($table_name);
 
-						//fetch result set and pass it to an array (associative)
-				  		foreach ($news_data as $key => $row) {
-						$page_title = $row['page_title'];
-						$page_content = $row['page_content'];
-						//$date_published = $row['date_published'];
-						$date_published = get_nice_date($row['date_published'], "full");
-                        $posted_by = $row['posted_by'];
-                        $page_picture = $row['page_picture'];
-						$photo_url = base_url().'news_pics/'.$page_picture;
-						$id = $row['id'];
+							//fetch result set and pass it to an array (associative)
+							foreach ($log_data as $key => $row) {
+							$full_name = $row['full_name'];
+							$equipment = $row['equipment'];
+							$date_borrow = $row['date_borrow'];
+							$date_return = $row['date_return'];
+							$remark = $row['remark'];
+							$id = $row['id'];
+						?>
+						<tr>
+							<td class="center span2">
+							<?= $id ?>
+							</td>
+							<td class="center"><?= $full_name ?></td>
+							<td class="center"><?= $equipment ?></td>
+							<td class="center"><?= $date_borrow ?></td>
+							<td class="center"><?= $date_return ?></td>
+							<td class="center"><?= $remark ?></td>
 
-				  		$edit_news_url = base_url().'news_edit.php?id='.$id;
-				  		$delete_news_url = base_url().'news_deleteconf.php?id='.$id;
-				  ?>
-					<tr>
-						<td class="center span2">
-							<?php
-							if ($page_picture == "") {
-							echo "<i>No photo available.</i>";
-							}
-							else {
-							?>
-							<img src="<?= $photo_url ?>" style="height: 100;width: 100;" class="img-responsive">
-							<?php
-							}
-							?>
-						</td>
-						<td class="center"><?= $page_title ?></td>
-						<td class="center"><?= $page_content ?></td>
-						<td class="center"><?= $date_published ?></td>
-						<td class="center"><?= $posted_by ?></td>
-
-						<td class="center">
-							<a class="btn btn-danger" href="<?= $delete_news_url ?>">
-								<i class="halflings-icon white trash"></i> delete 
-							</a>
-							<a class="btn btn-info" href="<?= $edit_news_url ?>">
-								<i class="halflings-icon white edit"></i> edit
-							</a>
-						</td>
-					</tr>
-					<?php } ?>
-				  </tbody>
+						</tr>
+						<?php } ?>
+					</tbody>
 				</table> 
 			</div>
 		</div>

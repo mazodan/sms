@@ -8,6 +8,33 @@ if ($acct_type=="2")
 {
 //	header("Location: no_access.php");
 }
+
+if(isset($_POST['item_log_submit'])){ //check if form was submitted
+
+    $data;
+    if ($_POST['date_return'] == '') {
+        $data = array(
+            "full_name" => $_POST['full_name'],
+            "equipment" => $_POST['equipment'],
+            "date_borrow" => $_POST['date_borrow'],
+            "remark" => $_POST['remark'],
+        );
+    } else {
+        $data = array(
+            "full_name" => $_POST['full_name'],
+            "equipment" => $_POST['equipment'],
+            "date_borrow" => $_POST['date_borrow'],
+            "date_return" => $_POST['date_return'],
+            "remark" => $_POST['remark'],
+        );
+    }
+
+    
+
+    $res = insert($data, "item_logs"); 
+}    
+
+
 ?>
 
 <h1>HELLO, <?= _get_firstname_from_id($_SESSION['id']) ?></h1>
@@ -48,7 +75,7 @@ if ($acct_type=="2")
                 <label for="remark">Remarks:</label>
                 <input type="text" name="remark" id="remark" class="input-small">
                 &nbsp;
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" name="item_log_submit" class="btn">Submit</button>
             </form>
         </div>
         
@@ -67,6 +94,35 @@ if ($acct_type=="2")
                   </tr>
 
                 </thead>
+                <tbody>
+                    <?php 
+                        $table_name = "item_logs";
+
+                        //get all records from users table
+                        $log_data = get($table_name);
+
+                        //fetch result set and pass it to an array (associative)
+                        foreach ($log_data as $key => $row) {
+                        $full_name = $row['full_name'];
+                        $equipment = $row['equipment'];
+                        $date_borrow = $row['date_borrow'];
+                        $date_return = $row['date_return'];
+                        $remark = $row['remark'];
+                        $id = $row['id'];
+                    ?>
+                    <tr>
+						<td class="center span2">
+                        <?= $id ?>
+						</td>
+						<td class="center"><?= $full_name ?></td>
+						<td class="center"><?= $equipment ?></td>
+						<td class="center"><?= $date_borrow ?></td>
+						<td class="center"><?= $date_return ?></td>
+						<td class="center"><?= $remark ?></td>
+
+					</tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     </div>
