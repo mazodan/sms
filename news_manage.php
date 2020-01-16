@@ -3,6 +3,18 @@
 
 <h1 class="page-header">Logs</h1>
 
+<?php
+	if(isset($_POST['date_return'])){ //check if form was submitted
+
+		date_default_timezone_set('Asia/Manila');
+		$data = array(
+			"date_return" => date('Y-m-d')
+		);
+
+		$res = update($data, $_POST['id'], "item_logs"); 
+	}  
+?>
+
 <!-- main content -->
 
 <div class="box-content">
@@ -58,9 +70,9 @@
 							<td><?php 
 								if ($date_return == "") {
 									echo(
-										'<form action="" method="post">
+										'<form action="" method="POST">
 											<input type="hidden" name="id" value="'.$id.'">
-											<button type="submit" class="btn btn-info"><i class="halflings-icon white check"></i>Return Item</button>
+											<button type="submit" class="btn btn-info" name="date_return"><i class="halflings-icon white check"></i>Return Item</button>
 										</form>'
 									);
 								} else {
@@ -69,7 +81,7 @@
 							?></td>
 							<td class="center"><?php
 								if ($remark == "") {
-									echo('<form action="" method="post">
+									echo('<form action="" method="post" class="form-inline">
 										<input type="hidden" name="id" value="'.$id.'">
 										<input type="text" name="remark" id="remark" class="input-medium">
 										<button type="submit" class="btn btn-info"><i class="icon-play"></i></button>
