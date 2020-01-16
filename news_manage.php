@@ -21,7 +21,7 @@
 				<h2><i class="halflings-icon white file"></i><span class="break"></span>Logs</h2>
 			</div>
 			<div class="box-content">
-				<table class="table table-striped table-bordered bootstrap-datatable datatable">
+				<table class="table table-striped table-bordered table-condensed bootstrap-datatable datatable">
 				  <thead>
 					  <tr>
 					  	  <th>&nbsp;</th>
@@ -55,11 +55,11 @@
 							<td class="center"><?= $full_name ?></td>
 							<td class="center"><?= $equipment ?></td>
 							<td class="center"><?= $date_borrow ?></td>
-							<td class="center"><?php 
+							<td><?php 
 								if ($date_return == "") {
 									echo(
 										'<form action="" method="post">
-											<input type="hidden" value="'.$id.'">
+											<input type="hidden" name="id" value="'.$id.'">
 											<button type="submit" class="btn btn-info"><i class="halflings-icon white check"></i>Return Item</button>
 										</form>'
 									);
@@ -69,9 +69,11 @@
 							?></td>
 							<td class="center"><?php
 								if ($remark == "") {
-									echo('<a class="btn btn-info">
-									<i class="icon-play"></i>
-									</a>'
+									echo('<form action="" method="post">
+										<input type="hidden" name="id" value="'.$id.'">
+										<input type="text" name="remark" id="remark" class="input-medium">
+										<button type="submit" class="btn btn-info"><i class="icon-play"></i></button>
+									</form>'
 									);
 								} else {
 									echo($remark);
